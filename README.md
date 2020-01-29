@@ -1,16 +1,16 @@
 # Pocket Museum
----
+
 ## Objective
 > Pocket Museum Is An Mobile App Designed To Be Your Personal Museum Guide That Allows You To Scan A Work Of Art And Learn More About Pieces Of Art, In An Easily Digestible Way
 
----
+
 ## Minimum Viable Product (MVP)
 - Users Can Upload A Photo Of A Painting To The App
 - App Searches Through Museum Database And Returns Title, Artist, Brief History/explanation Of Painting, And A Brief Overview Of The Artist
     - Use An Imaage Recognition API Or Train Model, To Identify The Image Of The Painting
 - Alternatively, Paintings Can Be Searched By Title Or Artist
 
----
+
 ## Stretch Goals
 - *Easy*:
     - User Login And Authentication
