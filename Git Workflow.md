@@ -36,3 +36,36 @@ Every feature should exist only on a branch until this happens...
 1. Title the Pull Request and write a detailed description of the feature and changes	
 1. Assign us as reviewers	
 1. Once the pull request has been reviewed, the Project Manager *only* will merge it
+
+---
+
+# Common GitHub Commands
+[GitHub Cheatsheet PDF](https://www.atlassian.com/dam/jcr:8132028b-024f-4b6b-953e-e68fcce0c5fa/atlassian-git-cheatsheet.pdf)
+
+Login:
+
+| Command | Description |
+| ------ | ------ |
+| git config --global user.name "username" |  |
+| git config --global user.email "email" |  |
+| git config user.name | Checks that you're in, in case you’re unsure |
+
+First Time Setup:
+
+| Command | Description |
+| ------ | ------ |
+| git clone | Creates local copy of remote repo. Try to not do this again unless you blew up your computer |
+
+General Use
+
+| Command | Description |
+| ------ | ------ |
+| cd "encryption-evolution" | Change directories over to our repository |
+| git branch | Lists branches for you |
+| git branch "branch name" | Makes new branch |
+| git checkout "branch name" | Switch to branch |
+| git checkout -b "branch name" | Same as 2 previous commands together |
+| git add . | Finds all changed files |
+| git commit -m "Testing123" | Commit with message |
+| git push origin "branch" | Push to branch |
+| git pull origin "branch" | Pull updates from a specific branch |
