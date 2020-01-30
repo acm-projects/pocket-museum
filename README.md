@@ -34,7 +34,7 @@
         - Tutorials:
             - [Get Familiar With VS Code](https://www.youtube.com/playlist?list=PLC3y8-rFHvwhleivq1QohBZN4d8IdzG3c): No Need To Start Coding From This Video; Just Watch It To See What And How VS Code Works
             - [Full In-Depth Set Up](https://www.youtube.com/watch?v=fnPhJHN0jTE): I HIGHLY Suggest You Watch This Video When You Want To Properly Setup And Configure VS Code Optimally
-- Front-End Technologies
+- *Front-End Technologies*
     - Creates The App, Uses Onboard Camera, Handles Authentication, Displays Data Beautifully
     - [React Native](https://facebook.github.io/react-native/): Allows You To Build A Cross Platform App, While Accessing The Onboard Camera For The Phone
         - Uses [Javascript](https://www.javascript.com/)
@@ -48,7 +48,7 @@
         - [Flutter Documentation](https://flutter.dev/docs/reference/tutorials)
         - [Video Tutorial For Flutter](https://www.youtube.com/watch?v=1gDhl4leEzA)
     - [Which To Use? React Native vs. Flutter](https://www.youtube.com/watch?v=tSyXb0sHBoE)
-- Back-End Technologies
+- *Back-End Technologies*
     - Handles Processing Of Data And Sends Desired Output Back To The Front-End
     - [Javascript](https://www.javascript.com/): Use Javascript, If Using React Native For Front-End
         - [JS Documentation](https://www.javascript.com/learn/strings)
@@ -57,7 +57,7 @@
         - [Interactive Programming With Python](https://www.codecademy.com/learn/learn-python-3)
         - [Video Tutorial For Python](https://www.youtube.com/watch?v=YYXdXT2l-Gg&list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU)
         
-- Database(s)
+- *Database(s)*
     - [Firebase](https://firebase.google.com/)
         - Enables User Authentication And Stores User Info In Their DB (i.e Personal Gallery Of Paintings)
         - [Why Use Firebase?](https://www.tristatetechnology.com/blog/firebase-backend-mobile-app/)
