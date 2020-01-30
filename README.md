@@ -27,19 +27,6 @@
     - *AR Feature*: Scan The Painting In The Museum And In Real Time, Display Information Related To That Painting On Your Phone
 
 ## Resources
-- *API's*:
-    - [What is An API?](https://www.youtube.com/watch?v=s7wmiS2mSXY)
-    - [Explanation Of REST API's](https://www.youtube.com/watch?v=7YcW25PHnAA)
-    - [Google Cloud Vision API](https://cloud.google.com/vision)
-        - Uses Very Powerful Image Recognition For A Lot Of Categories; Use This For *MVP* Image Recognition, Since It Has A Good Accuracy For Identifying Most Common Paintings
-    - [Watson Visual Recognition API](https://www.ibm.com/cloud/watson-visual-recognition) or [Clarifai API](https://www.clarifai.com/)
-        - Really Good Image Recognition Features Of An Image
-        - Doesn't Give Names Of Paintings
-        - Both Allow You To Build Your Own Custom Model, Tailored To Your Own Images
-        - Watson Offers 1000 API Calls/Per Month; Clarfai Offers 5000 API Calls/Per Month
-        - *NOTE*: Attempt Implementation Of These Custom Models, Once MVP Is Built
-    - [Metropolitan Museum API](https://metmuseum.github.io/)
-        - Database That Stores Information Related To The Majority Of Paintings At The Metropolitan Museum
 - *Text Editor(s)*
     - [Visual Studio Code](https://code.visualstudio.com/)
         - [What is Visual Studio Code?](https://code.visualstudio.com/docs/editor/whyvscode)
@@ -81,3 +68,16 @@
             - Using React-Native With Firebase
                 - [Detailed Tutorial #1](https://www.youtube.com/playlist?list=PLy9JCsy2u97m-xWAxGwHZ2vITtj4qBKDm): Goes Over Setup
                 - [Detailed Tutorial #2](https://www.youtube.com/playlist?list=PLDr7Z-9oq655ltYjAj3dbEqEbdkALt0fJ): Does Not Go Over Setup
+- *API's*:
+    - [What is An API?](https://www.youtube.com/watch?v=s7wmiS2mSXY)
+    - [Explanation Of REST API's](https://www.youtube.com/watch?v=7YcW25PHnAA)
+    - [Google Cloud Vision API](https://cloud.google.com/vision)
+        - Uses Very Powerful Image Recognition For A Lot Of Categories; Use This For *MVP* Image Recognition, Since It Has A Good Accuracy For Identifying Most Common Paintings
+    - [Watson Visual Recognition API](https://www.ibm.com/cloud/watson-visual-recognition) or [Clarifai API](https://www.clarifai.com/)
+        - Really Good Image Recognition Features Of An Image
+        - Doesn't Give Names Of Paintings
+        - Both Allow You To Build Your Own Custom Model, Tailored To Your Own Images
+        - Watson Offers 1000 API Calls/Per Month; Clarfai Offers 5000 API Calls/Per Month
+        - *NOTE*: Attempt Implementation Of These Custom Models, Once MVP Is Built
+    - [Metropolitan Museum API](https://metmuseum.github.io/)
+        - Database That Stores Information Related To The Majority Of Paintings At The Metropolitan Museum
