@@ -1,5 +1,5 @@
 # Git Workflow
-*Great Video Tutorial*: [https://www.youtube.com/watch?v=SWYqp7iY_Tc]
+*Great Video Tutorial*: https://www.youtube.com/watch?v=SWYqp7iY_Tc
 ## When starting a project	
 1. Download [Git](https://git-scm.com/download)	
 1. Go to [the repository](https://github.com/acm-projects/reverse-climate-change), and find "Clone or Download," and copy that link	
