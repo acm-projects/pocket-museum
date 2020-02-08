@@ -60,12 +60,12 @@ General Use
 
 | Command | Description |
 | ------ | ------ |
-| cd "pocket-museum" | Change directories over to our repository |
+| cd pocket-museum | Change directories over to our repository |
 | git branch | Lists branches for you |
-| git branch "branch name" | Makes new branch |
-| git checkout "branch name" | Switch to branch |
-| git checkout -b "branch name" | Same as 2 previous commands together |
+| git branch <branch name> | Makes new branch |
+| git checkout <branch name> | Switch to branch |
+| git checkout -b <branch name> | Creates a new branch and switches to it |
 | git add . | Finds all changed files |
-| git commit -m "Testing123" | Commit with message |
-| git push origin "branch" | Push to branch |
-| git pull origin "branch" | Pull updates from a specific branch |
+| git commit -m <message> | Commit with message |
+| git push origin <branch name> | Push to branch |
+| git pull origin <branch name> | Pull updates from a specific branch |
