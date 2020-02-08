@@ -9,7 +9,7 @@
 ## When working on a project	
 1. Go to the directory from the previous instructions	
 1. Open a terminal in that directory	
-1. Run `git checkout <branch>` or `git checkout -b <branch>` to start a new branch **never develop on the master branch**	
+1. Run `git checkout <branch>` or `git checkout -b <branch>` to start a new branch **never developed on the master branch**	
 1. Run `git pull`, this should be done everytime you sit down to develop to help avoid huge merge conflicts	
 1. If there are merge conflicts, got to "When resolving merge conflicts"	
 1. Make your changes	
