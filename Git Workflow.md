@@ -62,7 +62,7 @@ General Use
 | ------ | ------ |
 | cd pocket-museum | Change directories over to our repository |
 | git branch | Lists branches for you |
-| git branch <branch name> | Makes new branch |
+| git branch <<branch name>> | Makes new branch |
 | git checkout <branch name> | Switch to branch |
 | git checkout -b <branch name> | Creates a new branch and switches to it |
 | git add . | Finds all changed files |
