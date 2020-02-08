@@ -54,7 +54,7 @@ First Time Setup:
 
 | Command | Description |
 | ------ | ------ |
-| git clone | Creates local copy of remote repo. Try to not do this again unless you blew up your computer |
+| git clone <repo-url<null>> | Creates local copy of remote repo. Try to not do this again unless you blew up your computer |
 
 General Use
 
@@ -62,10 +62,10 @@ General Use
 | ------ | ------ |
 | cd pocket-museum | Change directories over to our repository |
 | git branch | Lists branches for you |
-| git branch <branch name<n>> | Makes new branch |
-| git checkout <branch name> | Switch to branch |
-| git checkout -b <branch name> | Creates a new branch and switches to it |
+| git branch <branch name<null>> | Makes new branch |
+| git checkout <branch name<null>> | Switch to branch |
+| git checkout -b <branch name<null>> | Creates a new branch and switches to it |
 | git add . | Finds all changed files |
-| git commit -m <message> | Commit with message |
-| git push origin <branch name> | Push to branch |
-| git pull origin <branch name> | Pull updates from a specific branch |
+| git commit -m <message<null>> | Commit with message |
+| git push origin <branch name<null>> | Push to branch |
+| git pull origin <branch name<null>> | Pull updates from a specific branch |
