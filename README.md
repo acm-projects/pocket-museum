@@ -15,16 +15,21 @@
     - User Login And Authentication
     - Ability To Save The Photo Of The Painting And Related Information To It On The App And Be Able To Revisit It Later (Creating Your Own "Pocket Museum"!!!)
         - Sort By Artist/Medium/Style/Time Period
+    - Voice Assistant
+        - Plays an audio track based on the information related to the painting
 - **Medium**:
     - Give Recommendations Of Artworks Based On The Pieces You've Scanned Before
     - Add More Museum Databases To The Project
     - Train A Personalized Model For Paintings Of A Particular Museum
+    - Voic
 - ***Hard***:
     - Ability To Scan Artwork's Placard, Instead Of Manually Typing Artwork’s Title
     - Create A Map With Pinpoints, Denoting What Pieces Are Where And Color Code By Artist
     - *Game Feature*: If You Are Dealing With One Museum's Database For The Time Being, Have All Of The Art Pieces Loaded In, But Make Them "Locked", And Then The User Would Have To Scan A Piece To Unlock Those Pieces (Can Be Awarded With Different Levels Or Medals)
+    - Give recommendations to museums internationally, based on typed keywords
 - ****EXTREME****:
     - *AR Feature*: Scan The Painting In The Museum And In Real Time, Display Information Related To That Painting On Your Phone
+    - Display art events/exhibitions that are happening around you and see who else is planning to show up to those events
 
 ## Resources
 - *Text Editor(s)*
