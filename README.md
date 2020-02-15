@@ -6,7 +6,7 @@
 ## Minimum Viable Product (MVP)
 - Users Can Upload A Photo Of A Painting To The App
 - App Searches Through Museum Database And Returns Title, Artist, Brief History/explanation Of Painting, And A Brief Overview Of The Artist
-    - Use An Imaage Recognition API To Identify The Image Of The Painting
+    - Use An Image Recognition API To Identify The Image Of The Painting
 - Alternatively, Paintings Can Be Searched By Title Or Artist
 - Analyze Paintings From ONE Museum For The Time Being
 
