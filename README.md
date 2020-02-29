@@ -8,7 +8,6 @@
 - App Searches Through Museum Database And Returns Title, Artist, Brief History/explanation Of Painting, And A Brief Overview Of The Artist
     - Use An Image Recognition API To Identify The Image Of The Painting
 - Alternatively, Paintings Can Be Searched By Title Or Artist
-- Analyze Paintings From ONE Museum For The Time Being
 
 ## Stretch Goals
 - *Easy*:
@@ -19,8 +18,6 @@
         - Plays an audio track based on the information related to the painting
 - **Medium**:
     - Give Recommendations Of Artworks Based On The Pieces You've Scanned Before
-    - Add More Museum Databases To The Project
-    - Train A Personalized Model For Paintings Of A Particular Museum
 - ***Hard***:
     - Ability To Scan Artwork's Placard, Instead Of Manually Typing Artwork’s Title
     - Create A Map With Pinpoints, Denoting What Pieces Are Where And Color Code By Artist
