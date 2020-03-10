@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////
+
+The code for camera and gallery is both in here. The code structure is similar but the functionality is different so it can be implemented
+separately in two different files if needed.
+
+////////////////////////////////////////////////////////////////
+
 import 'package:flutter/material.dart';
 
 import 'dart:io';
