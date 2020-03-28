@@ -3,12 +3,22 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import re
 import wikipedia
+import wikipediaapi
 
-title = 'Mona_Lisa'
+title = 'Mona Lisa'
 
-# assign my_url with the url of the wikipedia pag
-# e we want to get information from
-my_url = 'https://en.wikipedia.org/wiki/' + title
+
+# DISCUSS VARIETY OF LANGUAGE SUPPORT FUNCTIONALITY WITH THE FRONTEND
+wiki = wikipediaapi.Wikipedia('en')
+
+wiki_page = wiki.page(title)
+
+# if the page does not exist then print out a message saying that there is not a wikipedia page about the passed in title
+if wiki_page.exists() == False:
+  print("Not enough information can be presented")
+
+# get the page's url
+my_url = wiki_page.fullurl
 
 # opening connection and getting the page
 uClient = uReq(my_url)
@@ -50,7 +60,6 @@ for th in ths:
 # convert date to string and use the re.sub function to remove the strings and spaces(we only want numbers)
 
 
-# Resolved the issue below: 
 ##################################################################################################################################################
 # BUT MONA LISA DESCRIPTION SAYS "c. 1503–1506, perhaps continuing until c. 1517" AND PERHAPS CONTINUING UNIL PART WILL CUT OUT WHICH MIGHT BE BAD
 ##################################################################################################################################################
@@ -60,8 +69,6 @@ for th in ths:
 # By default, date will return 'c. 1650' for example in return and re.sub will strip out c. and return 1650 only
 date = str(date)
 
-
-# Updated code:
 # use the replace function instead of re.sub function to get rid of the characters "c." only and preserve the character "c"
 date = date.replace("c. ", "")
 
