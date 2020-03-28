@@ -74,11 +74,12 @@ date = date.replace("c. ", "")
 
 
 
-# label and print the artist, time period, medium and time period
+# label and print the title, artist, time period, medium and time period
 artist = "Artist:" + " " + artist_name
 time_period = "Time Period:" + " " + date
 art_medium = "Medium:" + " " + medium
 
+print(title)
 print(artist)
 print(time_period)
 print(art_medium)
@@ -94,7 +95,9 @@ print(art_medium)
 
 #
 #
+
 summary = "Summary:" + str(wikipedia.summary(title, sentences = 3))
+summary = summary.replace("()", "")
 print(summary)
 
 # Tested the code for the following paintings and correct output received
