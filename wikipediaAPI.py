@@ -4,11 +4,11 @@ from bs4 import BeautifulSoup as soup
 import re
 import wikipedia
 
-title = 'Mona Lisa'
+title = 'Mona_Lisa'
 
 # assign my_url with the url of the wikipedia pag
 # e we want to get information from
-my_url = 'https://en.wikipedia.org/wiki/The_Scream'
+my_url = 'https://en.wikipedia.org/wiki/' + title
 
 # opening connection and getting the page
 uClient = uReq(my_url)
@@ -50,6 +50,7 @@ for th in ths:
 # convert date to string and use the re.sub function to remove the strings and spaces(we only want numbers)
 
 
+# Resolved the issue below: 
 ##################################################################################################################################################
 # BUT MONA LISA DESCRIPTION SAYS "c. 1503–1506, perhaps continuing until c. 1517" AND PERHAPS CONTINUING UNIL PART WILL CUT OUT WHICH MIGHT BE BAD
 ##################################################################################################################################################
@@ -58,7 +59,13 @@ for th in ths:
 
 # By default, date will return 'c. 1650' for example in return and re.sub will strip out c. and return 1650 only
 date = str(date)
-date = re.sub('[abcdeefghijklmnopqrstuvwxyz.     ]', '', date)
+
+
+# Updated code:
+# use the replace function instead of re.sub function to get rid of the characters "c." only and preserve the character "c"
+date = date.replace("c. ", "")
+
+
 
 # label and print the artist, time period, medium and time period
 artist = "Artist:" + " " + artist_name
@@ -84,4 +91,4 @@ summary = "Summary:" + str(wikipedia.summary(title, sentences = 3))
 print(summary)
 
 # Tested the code for the following paintings and correct output received
-# Mona Lisa, Starry Night, The Scream, The Girl with pearl Earring
+# Mona Lisa, Starry Night, The Scream, The Girl with pearl Earring, The Last Supper
