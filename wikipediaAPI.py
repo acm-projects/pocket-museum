@@ -4,12 +4,15 @@ from bs4 import BeautifulSoup as soup
 import re
 import wikipedia
 import wikipediaapi
+from urllib.request import urlopen
 
-title = 'Mona Lisa'
+
+title = 'the last supper'
 
 
 # DISCUSS VARIETY OF LANGUAGE SUPPORT FUNCTIONALITY WITH THE FRONTEND
 wiki = wikipediaapi.Wikipedia('en')
+
 
 wiki_page = wiki.page(title)
 
@@ -40,22 +43,34 @@ container= page_soup.find("table", {"class":"infobox vevent"})
 artist = ''
 year = ''
 medium = ''
-# find all the th html tags in only the container specified above
-ths = container.find_all('th')
 
-# loop through all the th tags
+
+html = urlopen(my_url)
+bs = soup(html, 'html.parser')
+images = bs.find_all('img', {'src':re.compile('.jpg')})
+for image in images: 
+    image = image['src']+'\n'
+    break
+    
+
+
+  # find all the th html tags in only the container specified above
+ths = container.find_all('th')
+#if ths is not None:    
+
+  # loop through all the th tags
 for th in ths:
 
-# if the text of th tag is 'Artist' then use the find_next_sibling function to get the td tag and assign its text to artist_name
- if th.text == 'Artist':
-   artist_name = th.find_next_sibling("td").text
+  # if the text of th tag is 'Artist' then use the find_next_sibling function to get the td tag and assign its text to artist_name
+  if th.text == 'Artist':
+    artist_name = th.find_next_sibling("td").text
 
-# if the text of th tag is 'Year' then use the find_next_sibling function to get the td tag and assign its text to date
- elif th.text == 'Year':
-   date = th.find_next_sibling("td").text
- # if the text of th tag is 'Medium' or type then use the find_next_sibling function to get the td tag and assign its text to medium
- elif th.text == 'Medium' or th.text == "Type":
-   medium = th.find_next_sibling("td").text
+  # if the text of th tag is 'Year' then use the find_next_sibling function to get the td tag and assign its text to date
+  elif th.text == 'Year':
+    date = th.find_next_sibling("td").text
+  # if the text of th tag is 'Medium' or type then use the find_next_sibling function to get the td tag and assign its text to medium
+  elif th.text == 'Medium' or th.text == "Type":
+    medium = th.find_next_sibling("td").text
 
 # convert date to string and use the re.sub function to remove the strings and spaces(we only want numbers)
 
@@ -74,12 +89,13 @@ date = date.replace("c. ", "")
 
 
 
-# label and print the title, artist, time period, medium and time period
+# label and print the title,image, artist, time period, and medium in that order
 artist = "Artist:" + " " + artist_name
 time_period = "Time Period:" + " " + date
 art_medium = "Medium:" + " " + medium
 
 print(title)
+print(image)
 print(artist)
 print(time_period)
 print(art_medium)
@@ -102,3 +118,7 @@ print(summary)
 
 # Tested the code for the following paintings and correct output received
 # Mona Lisa, Starry Night, The Scream, The Girl with pearl Earring, The Last Supper
+
+#Note: getting this error while trying out different titles:    ths = container.find_all('th')
+# AttributeError: 'NoneType' object has no attribute 'find_all'
+#But works with Mona Lisa and The Scream
