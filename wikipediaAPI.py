@@ -6,22 +6,30 @@ import wikipedia
 import wikipediaapi
 from urllib.request import urlopen
 
+# Tested with Mona Lisa, The Scream,  Starry Night,  Girl with a Pearl Earring, The Last Supper, The Magpie
+title = 'Girl With a Pearl Earring'
 
-title = 'the last supper'
 
-
-# DISCUSS VARIETY OF LANGUAGE SUPPORT FUNCTIONALITY WITH THE FRONTEND
 wiki = wikipediaapi.Wikipedia('en')
 
 
-wiki_page = wiki.page(title)
+wiki_page = wiki.page(title.lower())
 
-# if the page does not exist then print out a message saying that there is not a wikipedia page about the passed in title
-if wiki_page.exists() == False:
-  print("Not enough information can be presented")
+#####################################################################################################
+# The Last Supper is an exception because it has the artist name, Leonardo, in the url:
+# https://en.wikipedia.org/wiki/The_Last_Supper_(Leonardo)'
+
+#Another example is of the painting Magpie by Monet
+# https://en.wikipedia.org/wiki/The_Magpie_(Monet)
+#####################################################################################################
 
 # get the page's url
 my_url = wiki_page.fullurl
+
+# tested if we can get the image of the paintings with additional parameters needed in the url such as an artist name
+# my_url = 'https://en.wikipedia.org/wiki/Woman_with_a_Parasol_-_Madame_Monet_and_Her_Son'
+
+# yes this can be done!
 
 # opening connection and getting the page
 uClient = uReq(my_url)
@@ -36,8 +44,12 @@ uClient.close()
 page_soup = soup(page_html, "html.parser") 
 
 # get the container that has the picture and other information including artist and the year
-# the container is the manual of style of the page
+# the container is the manual of style of the wikipedia page
 container= page_soup.find("table", {"class":"infobox vevent"})
+
+# if the wikipedia page's url does not take us to the right page then output this message to the user
+if container is None:
+    print("Not enough information is known")
 
 # set artist, year, and medium to empty string for now
 artist = ''
@@ -45,54 +57,51 @@ year = ''
 medium = ''
 
 
-html = urlopen(my_url)
-bs = soup(html, 'html.parser')
-images = bs.find_all('img', {'src':re.compile('.jpg')})
-for image in images: 
-    image = image['src']+'\n'
-    break
-    
 
-
-  # find all the th html tags in only the container specified above
+# find all the th html tags in only the container specified above
 ths = container.find_all('th')
-#if ths is not None:    
 
-  # loop through all the th tags
+
+
+# loop through all the th tags
 for th in ths:
 
-  # if the text of th tag is 'Artist' then use the find_next_sibling function to get the td tag and assign its text to artist_name
+  # if the text of th tag is 'Artist' then use the find_next_sibling function to get the td tag 
+  # and assign its text which contains the artist's name to the variable, artist_name
   if th.text == 'Artist':
     artist_name = th.find_next_sibling("td").text
 
-  # if the text of th tag is 'Year' then use the find_next_sibling function to get the td tag and assign its text to date
+  # if the text of th tag is 'Year' then use the find_next_sibling function to get the td tag 
+  # and assign its text which contains the date to the variable, date
   elif th.text == 'Year':
     date = th.find_next_sibling("td").text
-  # if the text of th tag is 'Medium' or type then use the find_next_sibling function to get the td tag and assign its text to medium
+
+  # if the text of th tag is 'Medium' then use the find_next_sibling function to get the td tag 
+  # and assign its text which contains the medium to the variable, medium
   elif th.text == 'Medium' or th.text == "Type":
     medium = th.find_next_sibling("td").text
 
 # convert date to string and use the re.sub function to remove the strings and spaces(we only want numbers)
 
-
-##################################################################################################################################################
-# BUT MONA LISA DESCRIPTION SAYS "c. 1503–1506, perhaps continuing until c. 1517" AND PERHAPS CONTINUING UNIL PART WILL CUT OUT WHICH MIGHT BE BAD
-##################################################################################################################################################
-
-
-
-# By default, date will return 'c. 1650' for example in return and re.sub will strip out c. and return 1650 only
-date = str(date)
-
+# convert the date to a string and 
 # use the replace function instead of re.sub function to get rid of the characters "c." only and preserve the character "c"
+
+date = str(date)
 date = date.replace("c. ", "")
 
+# get the url of the first image and exit to the printing steps
+html = urlopen(my_url)
+bs = soup(html, 'html.parser')
+images = bs.find_all('img', {'src':re.compile('.jpg')})
+for image in images: 
+  image = image['src']+'\n'
+  break
 
-
-# label and print the title,image, artist, time period, and medium in that order
+# label and print the title,imageUrl, artist, time period, and medium in that order
 artist = "Artist:" + " " + artist_name
 time_period = "Time Period:" + " " + date
 art_medium = "Medium:" + " " + medium
+  
 
 print(title)
 print(image)
@@ -101,19 +110,11 @@ print(time_period)
 print(art_medium)
 
 # print the summary from wikipedia page and put a default sentence length of 3 
-# 
 
+summary = "Summary: " + str(wikipedia.summary(title, sentences = 3))
 
-# (ASK FRONT END)
-
-
-
-
-#
-#
-
-summary = "Summary:" + str(wikipedia.summary(title, sentences = 3))
-summary = summary.replace("()", "")
+#remove the content inside the parenthesis from the summary
+summary = re.sub(r'\([^()]*\)', '', summary)
 print(summary)
 
 # Tested the code for the following paintings and correct output received
