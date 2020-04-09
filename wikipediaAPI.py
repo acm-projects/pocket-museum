@@ -11,7 +11,7 @@ from urllib.request import urlopen
 
 # Tested with Mona Lisa, The Scream,  Starry Night,  Girl with a Pearl Earring, The Last Supper, The Magpie
 # this title has to be exact like cannot be "The Girl With a Pearl Earring"
-title = 'Mona Lisa'
+title = 'Napoleon Crossing the Alps'
 
 
 wiki = wikipediaapi.Wikipedia('en')
@@ -162,6 +162,14 @@ ref.set({
         title: {
             'artist': artist_name,
             'wikiImageUrl': image,
+            ################################################################################################################
+            # The image url is stored as a string in the real time database so we will need to remove the quotes
+            # for the url to work
+
+            # Example: "//upload.wikimedia.org/wikipedia/commons/thumb/f/fd/David_-_Napoleon_crossing_the_Alps_-_Malmaison2.jpg/300px-David_-_Napoleon_crossing_the_Alps_-_Malmaison2.jpg"
+
+            # We need to remove the quotes
+            ################################################################################################################
             'date': date,
             'medium': medium
 
