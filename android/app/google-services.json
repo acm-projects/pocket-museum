@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "847180966121",
+    "firebase_url": "https://pmuploadtofirebase.firebaseio.com",
+    "project_id": "pmuploadtofirebase",
+    "storage_bucket": "pmuploadtofirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847180966121:android:8a186e802a5688efea2878",
+        "android_client_info": {
+          "package_name": "com.example.galleryandcamerafunctionality"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847180966121-ve0jd5m4pmin5u475rndm49mcolqv1a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8SQF2G4X6llpI18QC-jwBD7Xxr6Pmk_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847180966121-ve0jd5m4pmin5u475rndm49mcolqv1a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847180966121:android:b97bd928e89d64c4ea2878",
+        "android_client_info": {
+          "package_name": "com.example.pocket_museum_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847180966121-ve0jd5m4pmin5u475rndm49mcolqv1a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8SQF2G4X6llpI18QC-jwBD7Xxr6Pmk_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847180966121-ve0jd5m4pmin5u475rndm49mcolqv1a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
