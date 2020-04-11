@@ -32,7 +32,7 @@ def get_url():
 
     # get that last file object and set image_url variable to the url of that object and print the url
     blob = bucket.get_blob(lastFileName)
-    image_url = blob.public_url
+    image_url = str(blob.public_url)
     print(image_url)
 
 
