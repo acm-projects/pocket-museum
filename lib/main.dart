@@ -4,11 +4,6 @@ import 'package:pocket_museum_final/blocs/theme.dart';
 import 'package:pocket_museum_final/pages/homepage.dart';
 import 'package:provider/provider.dart';
 
-// Use these for changing the fonts
-List<bool> isSelected = [false, true, false];
-List<String> fonts = ['ComicNeue', 'Montserrat', 'OpenSans'];
-String fam = fonts[1];
-
 Future<void> main() async {
   runApp(MyApp());
 }

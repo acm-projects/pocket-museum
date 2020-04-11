@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pocket_museum_final/blocs/theme.dart';
+import 'package:pocket_museum_final/pages/infopage.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 
@@ -59,6 +60,11 @@ class _HPState extends State<Home> {
       super.initState();
     });
     // super.initState();
+  }
+
+    @override
+  void dispose() {
+    super.dispose();
   }
 
   Future uploadImage() async {
@@ -136,7 +142,7 @@ class _HPState extends State<Home> {
                 ? Container()
                 : RaisedButton(
                     color: Colors.orange[800],
-                    child: Text("Upload to Firebase Storage",
+                    child: Text("Upload to Firebase",
                         style: TextStyle(fontFamily: fam)),
                     onPressed: () {
                       Alert(
@@ -153,14 +159,17 @@ class _HPState extends State<Home> {
                                   fontSize: 20,
                                   fontFamily: fam),
                             ),
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () { Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage()));
+                            },
                             width: 120,
                             radius: BorderRadius.circular(0.0),
                           )
                         ],
                       ).show();
-
+                      
                       uploadImage();
+                      
                     },
                   ),
             // if the image is not selected don't show the option to upload to firebase storage
