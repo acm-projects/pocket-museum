@@ -5,12 +5,13 @@ class PaintingTitleText extends StatelessWidget {
       {@required this.artist,
       @required this.paintingTitle,
       this.timePeriod,
-      this.medium});
+      this.medium,this.font});
 
   final String artist;
   final String paintingTitle;
   final String timePeriod;
   final String medium;
+  final String font;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class PaintingTitleText extends StatelessWidget {
         Text(
           artist,
           style: TextStyle(
-            fontFamily: 'Raleway',
+            fontFamily: font,
             color: Colors.white,
             fontSize: 25.0,
             fontStyle: FontStyle.italic,
@@ -43,7 +44,7 @@ class PaintingTitleText extends StatelessWidget {
         Text(
           paintingTitle,
           style: TextStyle(
-            fontFamily: 'Raleway',
+            fontFamily: font,
             color: Colors.white,
             fontSize: 45.0,
           ),
@@ -52,7 +53,7 @@ class PaintingTitleText extends StatelessWidget {
         Text(
           timePeriod,
           style: TextStyle(
-            fontFamily: 'Raleway',
+            fontFamily: font,
             color: Colors.white,
             fontSize: 17.0,
           ),
@@ -61,7 +62,7 @@ class PaintingTitleText extends StatelessWidget {
         Text(
           medium,
           style: TextStyle(
-            fontFamily: 'Raleway',
+            fontFamily: font,
             color: Colors.white,
             fontSize: 17.0,
           ),
