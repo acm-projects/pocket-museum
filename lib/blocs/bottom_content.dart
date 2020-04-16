@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class BottomContent extends StatelessWidget {
-  BottomContent({@required this.description});
+  BottomContent({@required this.description, this.font});
 
   final String description;
+  final String font;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class BottomContent extends StatelessWidget {
             Text(
               description,
               style: TextStyle(
-                fontFamily: 'Raleway',
+                fontFamily: font,
                 fontSize: 18.0,
               ),
             ),
@@ -31,7 +32,7 @@ class BottomContent extends StatelessWidget {
                 child: Text(
                   "FIND ANOTHER",
                   style: TextStyle(
-                    fontFamily: 'Raleway',
+                    fontFamily: font,
                     color: Colors.white,
                   ),
                 ),
