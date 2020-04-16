@@ -32,7 +32,7 @@ class _HPState extends State<Home> {
   String _downloadUrl;
   String myImageName;
 
-   StorageReference _reference;
+  StorageReference _reference;
   Future getImage(bool isCamera) async {
     File image;
 
@@ -62,16 +62,16 @@ class _HPState extends State<Home> {
     // super.initState();
   }
 
-    @override
+  @override
   void dispose() {
     super.dispose();
   }
 
   Future uploadImage() async {
     // upload the image to firebase storage
-    myImageName = _imageFile.toString() + DateTime.now().toString();
-    _reference =
-      FirebaseStorage.instance.ref().child(myImageName);
+    String fileID = DateTime.now().toString();
+    myImageName = fileID.toString();
+    _reference = FirebaseStorage.instance.ref().child(myImageName);
     StorageUploadTask uploadTask = _reference.putFile(_imageFile);
     StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
 
@@ -83,7 +83,10 @@ class _HPState extends State<Home> {
 
   // get the download url of the image and set the downloaded flag variable to true
   Future downloadImage() async {
-    String _downloadedImageUrl = await  FirebaseStorage.instance.ref().child(myImageName).getDownloadURL();
+    String _downloadedImageUrl = await FirebaseStorage.instance
+        .ref()
+        .child(myImageName)
+        .getDownloadURL();
     // set the download url state to the url received from firebase
     setState(() {
       _downloadUrl = _downloadedImageUrl;
@@ -122,7 +125,7 @@ class _HPState extends State<Home> {
               child: Column(children: <Widget>[
             Align(
               alignment: Alignment.centerLeft,
-              child: Text("Modify Image",
+              child: Text("Modify Artwork",
                   style: TextStyle(
                       fontFamily: fam,
                       fontSize: 30,
@@ -142,7 +145,7 @@ class _HPState extends State<Home> {
                 ? Container()
                 : RaisedButton(
                     color: Colors.orange[800],
-                    child: Text("Upload to Firebase",
+                    child: Text("Check for Info",
                         style: TextStyle(fontFamily: fam)),
                     onPressed: () {
                       Alert(
@@ -159,17 +162,20 @@ class _HPState extends State<Home> {
                                   fontSize: 20,
                                   fontFamily: fam),
                             ),
-                            onPressed: () { Navigator.pop(context);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage()));
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => InfoPage(font:fam)));
                             },
                             width: 120,
                             radius: BorderRadius.circular(0.0),
                           )
                         ],
                       ).show();
-                      
+
                       uploadImage();
-                      
                     },
                   ),
             // if the image is not selected don't show the option to upload to firebase storage
@@ -177,8 +183,8 @@ class _HPState extends State<Home> {
                 ? Container()
                 : RaisedButton(
                     color: Colors.orange[800],
-                    child:
-                        Text("Take Another Image", style: TextStyle(fontFamily: fam)),
+                    child: Text("Take Another Image",
+                        style: TextStyle(fontFamily: fam)),
                     onPressed: () {
                       _uploaded = false;
                       getImage(true);
