@@ -296,6 +296,8 @@ app = Flask(__name__)
 # also output the title and summary along with other information
 @app.route('/')
 def sendOutput():
+   return jsonify([ {'summary': summary, 'artist': artist_name, 'date': date, 'medium': medium, 'title': title, 'image': image }])
+
   return jsonify([ {'summary': summary, 'artist': artist_name, 'date': date, 'medium': medium, 'title': title }])
 # the title is not returned first because the output is automatically returned in alphabetical order
 
