@@ -297,6 +297,8 @@ class _HPState extends State<Home> {
                 style: TextStyle(fontFamily: fam),
               ),
               onPressed: () {
+                // set _uploaded to false
+                _uploaded = false;
                 // pass false to getImage because we want to use gallery
                 getImage(false);
               },
