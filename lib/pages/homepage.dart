@@ -18,6 +18,9 @@ List<bool> isSelected = [false, true, false];
 List<String> fonts = ['ComicNeue', 'Montserrat', 'OpenSans'];
 String fam = fonts[1];
 
+// Orange color for entire app
+final Color pmorange = Colors.orange[800];
+
 // Creates the home/main page for the app
 class Home extends StatefulWidget {
   @override
@@ -28,9 +31,26 @@ class Home extends StatefulWidget {
 
 class _HPState extends State<Home> {
   File _imageFile;
-  bool _uploaded = false;
   String _downloadUrl;
   String myImageName;
+  bool _uploaded = false;
+  bool _copy = false;
+
+  @override
+  void initState() {
+    _getThingsOnStartup().then(
+      (value) {
+        getImage(true);
+        super.initState();
+      },
+    );
+    // super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   StorageReference _reference;
   Future getImage(bool isCamera) async {
@@ -48,36 +68,26 @@ class _HPState extends State<Home> {
     }
 
     // set the state to the newly received image file
-    setState(() {
-      _imageFile = image;
-    });
-  }
-
-  @override
-  void initState() {
-    _getThingsOnStartup().then((value) {
-      getImage(true);
-      super.initState();
-    });
-    // super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    setState(
+      () {
+        _imageFile = image;
+      },
+    );
   }
 
   Future uploadImage() async {
     // upload the image to firebase storage
-    myImageName = _imageFile.toString() + DateTime.now().toString();
+    myImageName = DateTime.now().toString();
     _reference = FirebaseStorage.instance.ref().child(myImageName);
     StorageUploadTask uploadTask = _reference.putFile(_imageFile);
     StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
 
     // update the uploaded state to true after uploading the image to firebase
-    setState(() {
-      _uploaded = true;
-    });
+    setState(
+      () {
+        _uploaded = true;
+      },
+    );
   }
 
   // get the download url of the image and set the downloaded flag variable to true
@@ -87,10 +97,14 @@ class _HPState extends State<Home> {
         .child(myImageName)
         .getDownloadURL();
     // set the download url state to the url received from firebase
-    setState(() {
-      _downloadUrl = _downloadedImageUrl;
-      Clipboard.setData(ClipboardData(text: _downloadUrl));
-    });
+    setState(
+      () {
+        _downloadUrl = _downloadedImageUrl;
+        Clipboard.setData(
+          ClipboardData(text: _downloadUrl),
+        );
+      },
+    );
   }
 
   var alertStyle = AlertStyle(
@@ -106,221 +120,406 @@ class _HPState extends State<Home> {
       ),
     ),
     titleStyle: TextStyle(
-        color: Colors.orange[800],
-        fontWeight: FontWeight.bold,
-        fontFamily: fam),
+        color: pmorange, fontWeight: FontWeight.bold, fontFamily: fam),
   );
 
   @override
   Widget build(BuildContext context) {
     ThemeChanger _themeChanger = Provider.of<ThemeChanger>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Pocket Museum", style: TextStyle(fontFamily: fam)),
-          backgroundColor: Colors.orange[800],
+      appBar: AppBar(
+        title: Text(
+          "Pocket Museum",
+          style: TextStyle(fontFamily: fam),
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              //Font Settings
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text("Settings",
-                    style: TextStyle(
+        backgroundColor: pmorange,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(10),
+            ),
+            //Font Settings
+            Align(
+              alignment: Alignment.centerLeft,
+              child: RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.body1,
+                  children: [
+                    WidgetSpan(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: Icon(Icons.settings),
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'App Settings ',
+                      style: TextStyle(
                         fontFamily: fam,
                         fontSize: 30,
-                        decoration: TextDecoration.underline)),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),
 
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
-                  Widget>[
-                Text("Font: ", style: TextStyle(fontFamily: fam, fontSize: 20)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.body1,
+                    children: [
+                      WidgetSpan(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                          child: Icon(Icons.text_fields),
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Font: ',
+                        style: TextStyle(
+                          fontFamily: fam,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 ToggleButtons(
                   children: <Widget>[
-                    Text("A",
-                        style:
-                            TextStyle(fontFamily: 'Comic Neue', fontSize: 10)),
-                    Text("A",
-                        style:
-                            TextStyle(fontFamily: 'Montserrat', fontSize: 10)),
-                    Text("A",
-                        style: TextStyle(fontFamily: 'OpenSans', fontSize: 10)),
+                    Text(
+                      "A",
+                      style: TextStyle(fontFamily: 'Comic Neue', fontSize: 10),
+                    ),
+                    Text(
+                      "A",
+                      style: TextStyle(fontFamily: 'Montserrat', fontSize: 10),
+                    ),
+                    Text(
+                      "A",
+                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 10),
+                    ),
                   ],
                   onPressed: (int index) {
-                    setState(() {
-                      for (int buttonIndex = 0;
-                          buttonIndex < isSelected.length;
-                          buttonIndex++) {
-                        if (buttonIndex == index) {
-                          isSelected[buttonIndex] = true;
-                          fam = fonts[buttonIndex];
-                        } else {
-                          isSelected[buttonIndex] = false;
+                    setState(
+                      () {
+                        for (int buttonIndex = 0;
+                            buttonIndex < isSelected.length;
+                            buttonIndex++) {
+                          if (buttonIndex == index) {
+                            isSelected[buttonIndex] = true;
+                            fam = fonts[buttonIndex];
+                          } else {
+                            isSelected[buttonIndex] = false;
+                          }
                         }
-                      }
-                    });
+                      },
+                    );
                   },
                   isSelected: isSelected,
                 ),
-              ]),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Toggle Mode: ",
-                    style: TextStyle(fontFamily: fam, fontSize: 20),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.body1,
+                    children: [
+                      WidgetSpan(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                          child: Icon(Icons.brightness_medium),
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Toggle Mode: ',
+                        style: TextStyle(
+                          fontFamily: fam,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
-                  Switch(
-                    value: (_themeChanger.getTheme() == ThemeData.dark()),
-                    onChanged: (value) {
-                      setState(() {
-                        _themeChanger.getTheme() == ThemeData.dark()
-                            ? _themeChanger.setTheme(ThemeData.light())
-                            : _themeChanger.setTheme(ThemeData.dark());
-                      });
-                    },
-                    activeTrackColor: Colors.orange[500],
-                    activeColor: Colors.orange[800],
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.all(30),
-                child: Image.asset(
-                  'assets/images/TranspMuseum.png',
-                  width: 100,
-                  height: 100,
-                  scale: 5,
                 ),
+                Switch(
+                  value: (_themeChanger.getTheme() == ThemeData.dark()),
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        _themeChanger.getTheme() == ThemeData.dark()
+                            ? _themeChanger.setTheme(
+                                ThemeData.light(),
+                              )
+                            : _themeChanger.setTheme(
+                                ThemeData.dark(),
+                              );
+                      },
+                    );
+                  },
+                  activeTrackColor: Colors.orange[500],
+                  activeColor: pmorange,
+                ),
+              ],
+            ),
+            // Hidden buttons
+            Padding(
+              padding: EdgeInsets.all(10),
+            ),
+            //Font Settings
+            Align(
+              alignment: Alignment.centerLeft,
+              child: RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.body1,
+                  children: [
+                    WidgetSpan(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: Icon(Icons.lock),
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Hidden Buttons ',
+                      style: TextStyle(
+                        fontFamily: fam,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.body1,
+                    children: [
+                      WidgetSpan(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                          child: Icon(Icons.content_copy),
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Toggle URL Copy: ',
+                        style: TextStyle(
+                          fontFamily: fam,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Switch(
+                  value: (_copy == false),
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        _copy = !value;
+                      },
+                    );
+                  },
+                  activeTrackColor: Colors.orange[500],
+                  activeColor: pmorange,
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: Image.asset(
+                'assets/images/TranspMuseum.png',
+                height: 100,
+                width: 100,
+              ),
+            ),
+          ],
+        ),
+      ),
+
+// All the functions in the main page
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(5),
+              ),
+              // once the upload is complete, then  allow for
+              // the user to download the image by calling the
+              // downloadImage function which also returns the url
+              // of the downloaded image
+              _copy == true
+                  ? Container()
+                  : _uploaded == false
+                      ? Text(
+                          "Nothing to copy - press the circular button to PM!",
+                          style: TextStyle(fontFamily: fam),
+                        )
+                      : FlatButton.icon(
+                          color: pmorange,
+                          icon: Icon(Icons.content_copy),
+                          label: Text(
+                            'Copy URL',
+                            style: TextStyle(fontFamily: fam),
+                          ),
+                          onPressed: () {
+                            downloadImage();
+                            Alert(
+                              context: context,
+                              style: alertStyle,
+                              title: "Copied to Clipboard!",
+                              buttons: [
+                                DialogButton(
+                                  color: pmorange,
+                                  child: Text(
+                                    "Righteous!",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: fam),
+                                  ),
+                                  onPressed: () => Navigator.pop(context),
+                                  width: 120,
+                                  radius: BorderRadius.circular(0.0),
+                                )
+                              ],
+                            ).show();
+                          },
+                        ),
+
+              Padding(
+                padding: EdgeInsets.all(5),
+              ),
+// if there is no image selected, return an empty container
+              // but if there is an image then display it.
+              _imageFile == null
+                  ? Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: pmorange,
+                          width: 8,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        "Nothing to see here. Take a picture or upload from gallery!",
+                        style: TextStyle(fontFamily: fam),
+                      ),
+                    )
+                  : Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: pmorange,
+                          width: 8,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Image.file(
+                        _imageFile,
+                        height: 300.0,
+                        width: 300.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+              Padding(
+                padding: EdgeInsets.all(5),
+              ),
+
+// Sends the artwork to Firebase for information retrieval if it hasn't already been sent. Unlocks the Copy URL button.
+              _imageFile == null
+                  ? Container()
+                  : SizedBox(
+                      width: 100.0,
+                      height: 100.0,
+                      child: FloatingActionButton(
+                        backgroundColor: Colors.transparent,
+                        onPressed: () {
+                          Alert(
+                            context: context,
+                            style: alertStyle,
+                            title: "Your artwork has been sent!",
+                            buttons: [
+                              DialogButton(
+                                color: pmorange,
+                                child: Text(
+                                  "Righteous!",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily: fam),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => InfoPage(
+                                        font: fam,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                width: 120,
+                                radius: BorderRadius.circular(0.0),
+                              )
+                            ],
+                          ).show();
+
+                          uploadImage();
+                        },
+                        child: Image.asset(
+                          'assets/images/black_circle.png',
+                          width: 100,
+                          height: 100,
+                          scale: 5,
+                        ),
+                      ),
+                    ),
+              // Gallery Code
+              FlatButton.icon(
+                color: pmorange,
+                icon: Icon(Icons.photo_size_select_actual),
+                label: Text(
+                  'Image From Gallery',
+                  style: TextStyle(fontFamily: fam),
+                ),
+                onPressed: () {
+                  // set _uploaded to false
+                  _uploaded = false;
+                  // pass false to getImage because we want to use gallery
+                  getImage(false);
+                },
+              ),
+              // if the image is not selected don't show the option to upload to firebase storage
+              FlatButton.icon(
+                color: pmorange,
+                icon: Icon(Icons.camera_alt),
+                label: Text(
+                  "Take Another Image",
+                  style: TextStyle(fontFamily: fam),
+                ),
+                onPressed: () {
+                  _uploaded = false;
+                  getImage(true);
+                },
               ),
             ],
           ),
         ),
-        body: SingleChildScrollView(
-          child: Center(
-              child: Column(children: <Widget>[
-            Padding(padding: EdgeInsets.all(10)),
-// if there is no image selected, return an empty container
-            // but if there is an image then display it.
-            _imageFile == null
-                ? Container()
-                : Image.file(
-                    _imageFile,
-                    height: 300.0,
-                    width: 300.0,
-                  ),
-            Padding(padding: EdgeInsets.all(5)),
-// if the image is not selected don't show the option to upload to firebase storage
-            _imageFile == null
-                ? Container()
-                : FlatButton(
-                    color: Colors.transparent,
-                    child: Image.asset(
-                      'assets/images/black_button.png',
-                      width: 100,
-                      height: 100,
-                      scale: 5,
-                    ),
-                    onPressed: () {
-                      Alert(
-                        context: context,
-                        style: alertStyle,
-                        title: "Your artwork has been sent!",
-                        buttons: [
-                          DialogButton(
-                            color: Colors.orange[800],
-                            child: Text(
-                              "Righteous!",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: fam),
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          InfoPage(font: fam)));
-                            },
-                            width: 120,
-                            radius: BorderRadius.circular(0.0),
-                          )
-                        ],
-                      ).show();
-
-                      uploadImage();
-                    },
-                  ),
-            // once the upload is complete, then  allow for
-            // the user to download the image by calling the
-            // downloadImage function which also returns the url
-            // of the downloaded image
-            _uploaded == false
-                ? Text("Press the museum icon to find out more!",
-                    style: TextStyle(fontFamily: fam))
-                : RaisedButton(
-                    color: Colors.orange[800],
-                    child: Text('Copy URL', style: TextStyle(fontFamily: fam)),
-                    onPressed: () {
-                      downloadImage();
-                      Alert(
-                        context: context,
-                        style: alertStyle,
-                        title: "Copied to Clipboard!",
-                        buttons: [
-                          DialogButton(
-                            color: Colors.orange[800],
-                            child: Text(
-                              "Righteous!",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: fam),
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                            width: 120,
-                            radius: BorderRadius.circular(0.0),
-                          )
-                        ],
-                      ).show();
-                    },
-                  ),
-                
-                        // Gallery Code
-            FlatButton.icon(
-              color: pmorange,
-              icon: Icon(Icons.photo_size_select_actual),
-              label: Text(
-                'Image From Gallery',
-                style: TextStyle(fontFamily: fam),
-              ),
-              onPressed: () {
-                // set _uploaded to false
-                _uploaded = false;
-                // pass false to getImage because we want to use gallery
-                getImage(false);
-              },
-            ),
-
-            // if the image is not selected don't show the option to upload to firebase storage
-            _imageFile == null
-                ? Container()
-                : RaisedButton(
-                    color: Colors.orange[800],
-                    child: Text("Take Another Image",
-                        style: TextStyle(fontFamily: fam)),
-                    onPressed: () {
-                      _uploaded = false;
-                      getImage(true);
-                    },
-                  ),
-          ])),
-        ));
+      ),
+    );
   }
 
   Future _getThingsOnStartup() async {
-    await Future.delayed(Duration(seconds: 0));
+    await Future.delayed(
+      Duration(seconds: 0),
+    );
   }
 }
