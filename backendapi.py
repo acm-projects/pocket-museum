@@ -291,9 +291,14 @@ api.add_route('/companies', companies_endpoint)
 
 app = Flask(__name__)
 
-@app.route('/test')
-def hello():
-  return jsonify([ {'title': title, 'artist': artist_name, 'date': date, 'medium': medium}])
+# now the app automatically routes to the url, you don't have to append '/test'
 
+# also output the title and summary along with other information
+@app.route('/')
+def sendOutput():
+  return jsonify([ {'summary': summary, 'artist': artist_name, 'date': date, 'medium': medium, 'title': title }])
+# the title is not returned first because the output is automatically returned in alphabetical order
+
+# the port can be changed to any port does not have to be 9090
 if __name__ == '__main__':
   app.run(debug = True, port=9090)
