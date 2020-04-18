@@ -287,6 +287,21 @@ class _HPState extends State<Home> {
                       ).show();
                     },
                   ),
+                
+                        // Gallery Code
+            FlatButton.icon(
+              color: pmorange,
+              icon: Icon(Icons.photo_size_select_actual),
+              label: Text(
+                'Image From Gallery',
+                style: TextStyle(fontFamily: fam),
+              ),
+              onPressed: () {
+                // pass false to getImage because we want to use gallery
+                getImage(false);
+              },
+            ),
+
             // if the image is not selected don't show the option to upload to firebase storage
             _imageFile == null
                 ? Container()
