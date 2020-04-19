@@ -263,32 +263,6 @@ ref.set({
 })
 '''
 
-'''
-companies = [{"id": artist_name, "name": image}, {"id": 2, "name": "Company Two"}]
-
-api = Flask(__name__)
-
-@api.route('/companies', methods=['GET'])
-def get_companies():
-  return json.dumps(companies)
-
-if __name__ == '__main__':
-    api.run()
-    '''
-
-
-
-'''
-class CompaniesResource(object):
-  companies = [{"id": 1, "name": artist_name}, {"id": 2, "name": "Company Two"}]
-  def on_get(self, req, resp):
-    resp.body = json.dumps(self.companies)
-
-api = falcon.API()
-companies_endpoint = CompaniesResource()
-api.add_route('/companies', companies_endpoint)
-'''
-
 app = Flask(__name__)
 
 # now the app automatically routes to the url, you don't have to append '/test'
